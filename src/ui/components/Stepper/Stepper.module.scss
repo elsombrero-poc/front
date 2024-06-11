@@ -1,0 +1,10 @@
+
+.item:not(:last-child):after{
+  content: ' ';
+  height: 3px;
+  display: block;
+  width: 95%;
+  position: relative;
+  bottom: 75%;
+  left: 50%;
+}

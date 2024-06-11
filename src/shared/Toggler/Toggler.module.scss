@@ -1,0 +1,14 @@
+
+.toggle::before {
+  transition: all 200ms;
+  @apply bg-white rounded-xl relative border shadow-sm;
+  content: ' ';
+  display: block;
+  width: 50%;
+  height: 50px;
+  margin-right: -50%;
+}
+
+.toggle.active::before{
+  transform: translateX(100%);
+}
