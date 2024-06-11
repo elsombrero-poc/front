@@ -2,9 +2,7 @@ import { Navbar } from "../../shared/components/Navbar/Navbar";
 import type { Metadata } from "next";
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import "../globals.scss";
-import { BackOfficeClient } from "../../api/http/back-office";
-import { ApiResponse } from "../../api/types";
-import { components } from "../../api/bo-schema";
+import { NavigationData } from "./providers/server/navigations";
 
 export const metadata: Metadata = {
   title: "Shippings",
@@ -16,14 +14,14 @@ export default async function HomeLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data }: ApiResponse<components['schemas']['NavigationListResponse']> 
-  = await BackOfficeClient.GET('/navigations') as any
   
+  const data = await NavigationData();
+
   return (
     <html lang="en">
       <body>
         <div className="flex">
-          <Navbar links={data.data?.sort((a, b) => (a.attributes?.order || 0) - (b.attributes?.order || 0))} />
+          <Navbar links={data?.sort((a, b) => (a.attributes?.order || 0) - (b.attributes?.order || 0))} />
           <div className="main w-full h-screen overflow-auto py-5 px-10 pb-10">
             {children}
           </div>
